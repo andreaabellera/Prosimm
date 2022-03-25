@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    font-family: 'Nunito', sans-serif;
+}
+  
+  /*=======================
+  //  PROSIMM DESIGN KIT
+  ========================*/
+  
+:root{
+    --darkOrange: #C67428;
+    --orange: #FF9534;
+    --yellow: #F6E2B0;
+    --liteYellow: #FFF2CF;
+    --grey: #7D7D7D;
+    --liteGrey: #E5E5E5;
+    --crimson: #D53C3C;
+    --leaf: #8AD87E;
+    --whitesmoke: #F3F3F3;
+}
+
+  /*================
+  //  ANIMATIONS
+  =================*/
+
+@keyframes desc{
+    0%{
+      transform: translateX(0em) skew(0deg,0turn);
+    }
+    100%{
+      transform: translateX(0em) skew(0deg,0turn);
+    }
+}
+
+  /*============
+  //  VIEW
+  =============*/
+.header{
+    position: fixed;
+    left: 0;
+    height: 11vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: xx-large;
+    background-color: white;
+}
+
+#logo{
+    background-image: url(nav_journals.png);
+    height: 1.25em;
+    width: 1.25em;
+    margin-right: 2vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#h-left{
+    margin-left: 4vw;
+    color: var(--orange);
+    display: flex;
+    align-items: center;
+}
+
+#h-right{
+    margin-right: 6vw;
+    color: var(--grey);
+    font-size: 150%;
+}
+
+.view{
+    width: 100%;
+}
+
+#content{
+    width: 100%;
+    height: 100vh;
+    background-color: #8AD87E;
+    margin-top: 12vh;
+    margin-bottom: 15vh;
+    overflow-y: scroll;
+}
+
+.navigation{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10vh;
+    background-color: var(--whitesmoke);
+    display: flex;
+    justify-content: space-evenly;
+    box-shadow: 0.1em 0.1em 2em 0.02em rgba(0, 0, 0, 0.18);
+}
+
