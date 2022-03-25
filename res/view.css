@@ -11,6 +11,21 @@ html, body{
     position: relative;
     font-family: 'Nunito', sans-serif;
     overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+}
+  
+body::-webkit-scrollbar {
+    width: 0px;
+    background-color: rgba(0, 0, 0, 0);
+}
+  
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
 }
   
   /*=======================
@@ -74,6 +89,7 @@ html, body{
     align-items: center;
     font-size: xx-large;
     background-color: white;
+    z-index: 3;
 }
 
 #logo{
@@ -111,7 +127,7 @@ html, body{
 #content{
     width: 100%;
     height: 100vh;
-    background-color: #8AD87E;
+    /* background-color: #8AD87E; */
     margin-top: 12vh;
     margin-bottom: 15vh;
 }
@@ -168,4 +184,363 @@ html, body{
 
 #nav-profile .nav-icon{
     background-image: url(nav_myteam.png);
+}
+
+  /*============
+  //  CARDS
+  =============*/
+
+.heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--orange);
+    width: 100%;
+    color: white;
+    padding: 2vh 0 2vh 0;
+    cursor: pointer;
+}
+
+.card{
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+  
+.card-box{
+    width: 90%;
+    align-self: center;
+}
+
+.card-task{
+    display: grid;
+    padding: 3vh 0 3vh 0;
+    grid-template-columns: auto 1fr 3em;
+    justify-items: flex-start;
+    align-items: center;
+    color: var(--darkOrange);
+}
+
+.card-ttask{
+    display: grid;
+    padding: 1vh 0 1vh 0;
+    grid-template-columns: auto 1fr 3em;
+    justify-items: flex-start;
+    align-items: center;
+    color: var(--darkOrange);
+}
+
+.card-project{
+    display: grid;
+    padding: 3vh 0 3vh 0;
+    grid-template-columns: auto 1fr;
+    justify-items: flex-start;
+    align-items: center;
+    color: var(--darkOrange);
+}
+
+.card-journal{
+    padding: 5vh 0 5vh 0;
+}
+
+.card-profile{
+    display: grid;
+    padding: 4vh 0 4vh 0;
+    grid-template-columns: auto 1fr;
+    justify-items: flex-start;
+    align-items: center;
+    color: var(--darkOrange);
+}
+
+.odd{
+    background-color: var(--liteYellow);
+}
+
+.even{
+    background-color: var(--yellow);
+}
+
+.journal-head{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2vh;
+}
+
+.journaller, .task-title, .project-name, .teammate-name{
+    font-weight: bold;
+}
+
+.journal-act, .project-desc, .impending, .teammate-email, .teammate-phone{
+    font-size: smaller;
+}
+
+.task-checkbox{
+    border-style: solid;
+    border-color: var(--grey);
+    border-width: 0.1em;
+    border-radius: 2em;
+    height: 2em;
+    width: 2em;
+    margin: 0 1.5em 0 0.5em;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.pie{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 8em;
+    width: 8em;
+    margin: 0 1.5em 0 0.5em;
+}
+
+#pie0{
+    background-image: url(pie1.png);
+}
+
+#pie1{
+    background-image: url(pie2.png);
+}
+
+#pie2{
+    background-image: url(pie3.png);
+}
+
+.project-select{
+    border-style: dotted;
+    border-color: var(--leaf);
+    border-width: 0.1em;
+    border-radius: 1em;
+}
+
+.teammate-pfp{
+    border-style: solid;
+    border-color: var(--grey);
+    border-width: 0.1em;
+    border-radius: 2em;
+    position: relative;
+    background-image: url(nav_myteam.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 4em;
+    width: 4em;
+    margin: 0 1.5em 0 0.5em;
+    overflow: hidden;
+}
+
+.overlay{
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+}
+
+#teammate0{
+    background-color: rgba(40, 225, 10, 0.2);
+}
+
+#teammate1{
+    background-color: rgba(40, 10, 225, 0.2);
+}
+
+#teammate2{
+    background-color: rgba(40, 225, 225, 0.2);
+}
+
+#teammate3{
+    background-color: rgba(225, 10, 40, 0.2);
+}
+
+.help-btn{
+    background-image: url(help.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 3em;
+    width: 3em;
+}
+
+.setting-icon{
+    margin: 0 1.5em 0 0.5em;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 4em;
+    width: 4em;
+}
+
+#setting-name{
+    background-image: url("nav_myteam.png");
+}
+
+#setting-email{
+    background-image: url("profile_email.png");
+}
+
+#setting-time{
+    background-image: url("profile_time.png");
+}
+
+#setting-avail{
+    background-image: url("profile_avail.png");
+}
+
+.due-day{
+    font-size: x-large;
+}
+
+.impending{
+    color: var(--crimson);
+}
+
+.task-due{
+    text-align: center;
+}
+
+.task-status{
+    height: 90%;
+    width: 1.5em;
+    margin-right: 1.5em;
+}
+
+.in-progress{
+    background-color: var(--yellow);
+}
+
+.unstarted{
+    background-color: var(--liteYellow);
+}
+
+.tick{
+    background-color: var(--leaf);
+    height: 80%;
+    width: 80%;
+    clip-path: polygon(70% 0%, 100% 30%, 50% 100%, 0% 60%, 40% 50%, 50% 70%);
+}
+
+.strike{
+    text-decoration: line-through;
+    color: var(--grey);
+}
+
+.greyed{
+    color: var(--grey);
+}
+
+.card-profile input{
+    height: 80%;
+    width: 50vw;
+    border-style: none;
+    border-bottom-style: solid;
+    outline: none;
+    color: var(--darkOrange);
+    font-size: larger;
+    font-family:'Nunito', sans-serif;
+}
+
+.team-progress{
+    position: relative;
+    height: 35vh;
+    margin-bottom: 5vh;
+}
+
+.team-array{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.team-icons{
+    bottom: 1.5em;
+    z-index: 3;
+}
+
+.team-selects{
+    bottom: 0;
+}
+
+.team-bars{
+    bottom: 2em;
+    z-index: 2;
+}
+
+.team-array-icon{
+    height: 3em;
+    width: 3em;
+    border-style: solid;
+    border-color: var(--grey);
+    border-width: 0.1em;
+    border-radius: 3em;
+    position: relative;
+    background-image: url(nav_myteam.png);
+    background-size: contain;
+    background-position: center;
+    display: grid;
+    overflow: hidden;
+    justify-items: center;
+    align-items: center;
+}
+
+.team-array-selector{
+    height: 0.5em;
+    width: 3em;
+    background-color: white;
+}
+
+.team-array-bar{
+    height: 13em;
+    width: 3em;
+    background-color: white;
+    display: grid;
+    justify-items: center;
+    align-items: flex-end;
+    position: relative;
+}
+
+.bar{
+    width: 75%;
+    background-color: var(--liteYellow);
+}
+
+.subbar{
+    position: absolute;
+    width: 75%;
+    background-color: var(--yellow);
+}
+
+#bar0{
+    height: 60%;
+}
+
+#bar1{
+    height: 80%;
+}
+
+#bar2{
+    height: 40%;
+}
+
+#bar3{
+    height: 0%;
+}
+
+#sbar0{
+    height: 40%;
+}
+
+#sbar1{
+    height: 30%;
+}
+
+#sbar2{
+    height: 30%;
+}
+
+.teammate-selected{
+    background-color: var(--orange);
 }
