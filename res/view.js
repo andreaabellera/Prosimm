@@ -45,8 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.id = "modal"
         modal.innerHTML=`
             <div class="lightbox">
+                <div class="heading"> POPUP DETAILS </div>
                 <div id="lightbox-content">
                     ${temp}
+                </div>
+                <div class="options">
+                    <div id="cancel"> CANCEL </div>
+                    <div id="confirm"> CONFIRM </div>
                 </div>
             </div>
         `

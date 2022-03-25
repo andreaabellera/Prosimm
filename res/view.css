@@ -77,6 +77,14 @@ body::-webkit-scrollbar-thumb {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    display: grid;
+    justify-items: center;
+}
+
+#lightbox-content{
+    height: 40vh;
+    margin: 2vh 0 2vh 0;
+    width: 90%;
 }
 
 .header{
@@ -201,6 +209,24 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
 }
 
+.options{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: center;
+    align-items: center;
+    background-color: var(--orange);
+    width: 100%;
+    color: white;
+    cursor: pointer;
+}
+
+#cancel{
+    width: 100%; 
+    background-color: var(--liteGrey);
+    color: var(--grey);
+    padding: 2vh 0 2vh 0;
+}
+
 .card{
     height: max-content;
     display: flex;
@@ -312,7 +338,7 @@ body::-webkit-scrollbar-thumb {
 .project-select{
     border-style: dotted;
     border-color: var(--leaf);
-    border-width: 0.1em;
+    border-width: 0.2em;
     border-radius: 1em;
 }
 
