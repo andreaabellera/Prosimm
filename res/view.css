@@ -82,7 +82,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 #lightbox-content{
-    height: 40vh;
+    height: max-content;
+    max-height: 40vh;
     margin: 2vh 0 2vh 0;
     width: 90%;
 }
@@ -200,13 +201,22 @@ body::-webkit-scrollbar-thumb {
 
 .heading{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     background-color: var(--orange);
     width: 100%;
     color: white;
     padding: 2vh 0 2vh 0;
     cursor: pointer;
+}
+
+.heading button{
+    background-color: var(--crimson);
+    border-color: white;
+    border-style: solid;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .options{
@@ -459,7 +469,18 @@ body::-webkit-scrollbar-thumb {
 
 .card-profile input{
     height: 80%;
-    width: 50vw;
+    width: 55vw;
+    border-style: none;
+    border-bottom-style: solid;
+    outline: none;
+    color: var(--darkOrange);
+    font-size: larger;
+    font-family:'Nunito', sans-serif;
+}
+
+#lightbox-content input{
+    height: 30%;
+    width: 100%;
     border-style: none;
     border-bottom-style: solid;
     outline: none;
