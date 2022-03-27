@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if(currView == "nav-my-team")
             body.appendChild(inviteModal("INVITE TEAMMATE"))
         else if(currView == "nav-projects")
-            body.appendChild(taskModal("ADD NEW TASK"))
+            body.appendChild(projectModal("ADD NEW PROJECT"))
     });
 
     function updateView(){
@@ -111,6 +111,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     function loadTeamTasks(){
+        // HELP ME I AM VERY UGLY AND I NEED TO FIX THIS
+
+        let andrea = [ // Progress, Task Names, Task Dues
+            ["IP","IP","IP","NS"],
+            ["Finish report", "Annotated outline", "Lab writeup", "Prosimm team meeting"],
+            ["9 MAR", "10 MAR", "11 MAR", "14 MAR"]
+        ]
+        let yuhan = [
+            ["IP","IP","NS","NS","NS"],
+            ["Buy giftcards", "Interview with Ghub", "Interview conclusions", "Prosimm icon set", "Prosimm logo"],
+            ["8 MAR", "9 MAR", "11 MAR", "12 MAR", "14 MAR"]
+        ]
+        let lyka = [
+            ["IP","IP","NS"],
+            ["Interview with Maya", "Interview notes", "Get college respondent"],
+            ["9 MAR", "12 MAR", "14 MAR"]
+        ]
+        let jane = [] // Jane has no tasks and can steal
+        let team = [andrea, yuhan, lyka, jane]
+
+        for(let mate of team){
+            for(let i in mate[0]){
+                console.log(mate[0][i] + " " + mate[1][i] + " " + mate[2][i])
+                //content.appendChild(ttaskCardCreator(mate[0][i], mate[1][i], mate[2][i]))
+            }
+        }
+
         content.innerHTML = `
             <div class="card"> 
                 <div class="card-box team-progress">
@@ -522,6 +549,46 @@ document.addEventListener("DOMContentLoaded", () => {
                         closeModal()
                         alert("Invitation sent!")
                     })
+
+                options.appendChild(cancel)
+                options.appendChild(confirm)
+
+            lightbox.appendChild(heading)
+            lightbox.appendChild(lightboxContent)
+            lightbox.appendChild(options)
+        
+        modal.appendChild(lightbox)
+        body.appendChild(modal)
+        return modal
+    }
+
+    var projectModal = (title) => {
+        let modal = document.createElement("div")
+        modal.id = "modal"
+
+            let lightbox = document.createElement("div")
+            lightbox.classList.add("lightbox")
+
+                let heading = document.createElement("div")
+                heading.classList.add("heading")
+                heading.innerText = title
+
+                let lightboxContent = document.createElement("div")
+                lightboxContent.id = "lightbox-content"
+                lightboxContent.innerText = `Adding new project.\n\nThis interface had been intentionally left out of the prototype.`
+
+                let options = document.createElement("div")
+                options.classList.add("options")
+
+                    let cancel = document.createElement("div")
+                    cancel.id = "cancel"
+                    cancel.innerText = "CANCEL"
+                    cancel.onclick = closeModal
+
+                    let confirm = document.createElement("div")
+                    confirm.id = "confirm"
+                    confirm.innerText = "CONFIRM"
+                    confirm.onclick = closeModal
 
                 options.appendChild(cancel)
                 options.appendChild(confirm)
