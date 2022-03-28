@@ -210,13 +210,22 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
 }
 
-.heading button{
-    background-color: var(--crimson);
-    border-color: white;
+#del-btn{
+    /* background-color: var(--crimson);
+    border-color: white; 
+    color: white; */
+    border-color: var(--grey);
     border-style: solid;
-    color: white;
+    color: var(--crimson);
+    background-color: var(--whitesmoke);
     cursor: pointer;
-    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    padding: 1em;
+    margin-top: 3vh;
+    position: absolute;
+    right: 5%;
+    border-radius: 1em;
 }
 
 .options{
@@ -423,10 +432,6 @@ body::-webkit-scrollbar-thumb {
 
 #setting-avail{
     background-image: url("profile_avail.png");
-}
-
-.due-day{
-    font-size: x-large;
 }
 
 .impending{
