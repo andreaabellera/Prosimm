@@ -246,7 +246,7 @@ body::-webkit-scrollbar-thumb {
     padding: 2vh 0 2vh 0;
 }
 
-.card{
+.card, .notcard{
     height: max-content;
     display: flex;
     flex-direction: column;
@@ -296,6 +296,12 @@ body::-webkit-scrollbar-thumb {
     justify-items: flex-start;
     align-items: center;
     color: var(--darkOrange);
+}
+
+#steal-info{
+    color: var(--darkOrange);
+    text-align: center;
+    margin: 1vh 0 2vh 0;
 }
 
 .odd{
@@ -454,6 +460,14 @@ body::-webkit-scrollbar-thumb {
 
 .unstarted{
     background-color: var(--liteYellow);
+}
+
+.paused{
+    background-color: var(--crimson);
+}
+
+.completed{
+    background-color: var(--leaf);
 }
 
 .tick{

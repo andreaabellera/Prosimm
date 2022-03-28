@@ -1,6 +1,29 @@
 let currView = "nav-my-tasks"
 let currProject = "project0"
 let today = 9 // Assume today is March 9 for due warnings
+let user = "Andrea Abellera"
+
+let andrea = [ // Progress, Task Names, Task Dues
+    ["IP","IP","IP","NS"],
+    ["Finish report", "Annotated outline", "Lab writeup", "Prosimm team meeting"],
+    ["9 MAR", "10 MAR", "11 MAR", "14 MAR"]
+]
+
+let yuhan = [
+    ["IP","IP","NS","NS","NS"],
+    ["Buy giftcards", "Interview with Ghub", "Interview conclusions", "Prosimm icon set", "Prosimm logo"],
+    ["7 MAR", "9 MAR", "11 MAR", "12 MAR", "14 MAR"]
+]
+
+let lyka = [
+    ["IP","IP","NS"],
+    ["Interview with Maya", "Interview notes", "Get college respondent"],
+    ["9 MAR", "12 MAR", "14 MAR"]
+]
+
+let jane = [[],[],[]] // Jane has no tasks and can steal
+
+let team = [andrea, yuhan, lyka, jane]
 
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.getElementById("h-left")
@@ -32,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(currView == "nav-my-tasks")
             body.appendChild(taskModal("ADD NEW TASK"))
         else if(currView == "nav-team-tasks")
-            body.appendChild(taskModal("ADD NEW TASK"))
+            body.appendChild(taskModal("ADD NEW TASK", false, true))
         else if(currView == "nav-journals")
             body.appendChild(journalModal("ADD NEW JOURNAL"))
         else if(currView == "nav-my-team")
@@ -46,8 +69,27 @@ document.addEventListener("DOMContentLoaded", () => {
         add.style.display="block"
         if(currView == "nav-my-tasks")
             loadMyTasks()
-        else if(currView == "nav-team-tasks")
+        else if(currView == "nav-team-tasks"){
             loadTeamTasks()
+            let icons = document.getElementsByClassName("overlay")
+            for(let icon of icons){
+                icon.addEventListener("click", function f(e) { 
+                    let id = e.currentTarget.id
+                    let num = id[id.length-1]
+                    selectorId = "selector" + num
+
+                    // Clear selectors
+                    let selectors = document.getElementsByClassName("team-array-selector")
+                    for(let selector of selectors){
+                        selector.classList.remove("teammate-selected")
+                    }
+
+                    // Add selection
+                    document.getElementById(selectorId).classList.add("teammate-selected")
+                    loadTeammateTasks(num)
+                });
+            }
+        }
         else if(currView == "nav-journals")
             loadJournals()
         else if(currView == "nav-my-team"){
@@ -114,34 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function loadTeamTasks(){
         // HELP ME I AM VERY UGLY AND I NEED TO FIX THIS
-
-        let andrea = [ // Progress, Task Names, Task Dues
-            ["IP","IP","IP","NS"],
-            ["Finish report", "Annotated outline", "Lab writeup", "Prosimm team meeting"],
-            ["9 MAR", "10 MAR", "11 MAR", "14 MAR"]
-        ]
-        let yuhan = [
-            ["IP","IP","NS","NS","NS"],
-            ["Buy giftcards", "Interview with Ghub", "Interview conclusions", "Prosimm icon set", "Prosimm logo"],
-            ["8 MAR", "9 MAR", "11 MAR", "12 MAR", "14 MAR"]
-        ]
-        let lyka = [
-            ["IP","IP","NS"],
-            ["Interview with Maya", "Interview notes", "Get college respondent"],
-            ["9 MAR", "12 MAR", "14 MAR"]
-        ]
-        let jane = [] // Jane has no tasks and can steal
-        let team = [andrea, yuhan, lyka, jane]
-
-        for(let mate of team){
-            for(let i in mate[0]){
-                console.log(mate[0][i] + " " + mate[1][i] + " " + mate[2][i])
-                //content.appendChild(ttaskCardCreator(mate[0][i], mate[1][i], mate[2][i]))
-            }
-        }
-
         content.innerHTML = `
-            <div class="card"> 
+            <div class="notcard"> 
                 <div class="card-box team-progress">
                     <div class="team-array team-bars">
                         <div class="team-array-bar"><div id="sbar0" class="subbar"></div><div id="bar0" class="bar"></div></div>
@@ -156,10 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="team-array-icon"><div id="teammate3" class="overlay"></div></div>
                     </div>
                     <div class="team-array team-selects">
-                        <div class="team-array-selector"></div>
-                        <div class="team-array-selector"></div>
-                        <div class="team-array-selector teammate-selected"></div>
-                        <div class="team-array-selector"></div>
+                        <div id="selector0" class="team-array-selector"></div>
+                        <div id="selector1" class="team-array-selector"></div>
+                        <div id="selector2" class="team-array-selector"></div>
+                        <div id="selector3" class="team-array-selector"></div>
                     </div>
                 </div>
             </div>
@@ -190,6 +206,43 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
         `
+    }
+
+    function loadTeammateTasks(num){
+        let currCards = document.getElementsByClassName("card")
+        while(currCards.length > 0){
+            for(card of currCards)
+                card.parentElement.removeChild(card)
+            currCards = document.getElementsByClassName("card")
+        }
+        if(team[num][0].length == 0){ // IT IS A JANE!!!
+            let stealC = document.createElement("div")
+            stealC.classList.add("card")
+            let stealInfo = document.createElement("div")
+            stealInfo.classList.add("card-box")
+            stealInfo.id="steal-info"
+            stealInfo.innerHTML = "No tasks left.<br><b>Steal a task?</b>"
+            stealC.appendChild(stealInfo)
+            content.appendChild(stealC)
+
+            // Get suggested tasks
+            for(let mate of team){
+                let statuses = mate[0]
+                for(let s in statuses){
+                    if(statuses[s] == "NS"){
+                        content.appendChild(ttaskCardCreator(statuses[s], mate[1][s], mate[2][s], true))
+                    }
+                }
+            }
+        }
+        else{
+            for(let item in team[num][0]){
+                let status = team[num][0][item]
+                let task = team[num][1][item]
+                let due = team[num][2][item]
+                content.appendChild(ttaskCardCreator(status, task, due))
+            }
+        }
     }
     
     function loadJournals(){
@@ -382,6 +435,55 @@ document.addEventListener("DOMContentLoaded", () => {
             return card
     }
 
+    function ttaskCardCreator(status, name, due, stealing=false){
+        let card = document.createElement("div")
+            card.classList.add("card")
+            
+                let cardInner = document.createElement("div")
+                cardInner.classList.add("card-box")
+                cardInner.classList.add("card-ttask")
+
+                    let taskStatus = document.createElement("div")
+                    taskStatus.classList.add("task-status")
+                    switch(status){
+                        case "NS": taskStatus.classList.add("unstarted"); break;
+                        case "IP": taskStatus.classList.add("in-progress"); break;
+                        case "P": taskStatus.classList.add("paused"); break;
+                        case "CP": taskStatus.classList.add("completed"); break;
+                    }
+                    
+                    let taskDue = document.createElement("div")
+                    taskDue.classList.add("task-due")
+                    let toks = due.split(" ")
+                    taskDue.innerHTML = `<div class="due-day"> ${toks[0]} </div>
+                    <div class="due-month"> ${toks[1]} </div>`
+
+                    let taskInfo = document.createElement("div")
+                    taskInfo.classList.add("task-info")
+                    taskInfo.innerHTML = `<div class="task-title"> ${name} </div>
+                                    <div class="impending"> ${getDueMessage(toks[0])} </div>`
+
+                cardInner.appendChild(taskStatus)
+                cardInner.appendChild(taskInfo)
+                cardInner.appendChild(taskDue)
+
+            card.appendChild(cardInner)
+
+            if(stealing){
+                card.addEventListener("click", function f(e) {
+                    let stolenCard = e.currentTarget
+                    console.log("Stole" + e.currentTarget.innerHTML)
+                    shift(stolenCard)
+                });
+            }
+            return card
+    }
+
+    function shift(card){
+        let stealInfo = document.getElementById("steal-info")
+        stealInfo.before(card)
+    }
+
     function journalCardCreator(teammate,act,message,date){
         let card = document.createElement("div")
         card.classList.add("card")
@@ -430,7 +532,7 @@ document.addEventListener("DOMContentLoaded", () => {
         body.removeChild(document.getElementById("modal"))
     }
 
-    var taskModal = (title, edit=false) => {
+    var taskModal = (title, edit=false, team=false) => {
         let modal = document.createElement("div")
         modal.id = "modal"
 
@@ -458,8 +560,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     confirm.innerText = "CONFIRM"
                     confirm.addEventListener("click", function f(e){
                         if(!edit){
-                            content.appendChild(taskCardCreator("New Task", "15 MAR"))
-                            content.appendChild(document.getElementById("del-btn"))
+                            if(team)
+                                content.appendChild(ttaskCardCreator("NS", "New Task", "15 MAR"))
+                            else{
+                                content.appendChild(taskCardCreator("New Task", "15 MAR"))
+                                content.appendChild(document.getElementById("del-btn"))
+                            }
                         }
                         closeModal()
                     })
