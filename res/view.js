@@ -25,6 +25,13 @@ let jane = [[],[],[]] // Jane has no tasks and can steal
 
 let team = [andrea, yuhan, lyka, jane]
 
+let befores = []
+let afters = []
+
+// endl me now
+let barEnds = [60, 80, 40, 0]
+let sbarEnds = [40, 30, 30, 0]
+
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.getElementById("h-left")
     const add = document.getElementById("h-right")
@@ -71,6 +78,45 @@ document.addEventListener("DOMContentLoaded", () => {
             loadMyTasks()
         else if(currView == "nav-team-tasks"){
             loadTeamTasks()
+
+            // Animate bars
+            let bars = []
+            let sbars = []
+            for(let i=0; i<team.length; i++){
+                bars.push(document.getElementById("bar" + i))
+                sbars.push(document.getElementById("sbar" + i))
+            }
+
+            for (let i in bars){
+                let endH = barEnds[i]
+                var id = setInterval(frame, 80);
+                var pos = 100;
+                function frame() {
+                    if (pos < endH) {
+                        clearInterval(id);
+                        bars[i].style.height = endH + "%";
+                    } else {
+                        pos--;
+                        bars[i].style.height = pos + "%";
+                    }
+                }
+            }
+            for (let i in sbars){
+                let endH = sbarEnds[i]
+                var id = setInterval(frame, 80);
+                var pos = 100;
+                function frame() {
+                    if (pos < endH) {
+                        clearInterval(id);
+                        sbars[i].style.height = endH + "%";
+                    } else {
+                        pos--;
+                        sbars[i].style.height = pos + "%";
+                    }
+                }
+            }
+
+            // Add selection to teammate icons
             let icons = document.getElementsByClassName("overlay")
             for(let icon of icons){
                 icon.addEventListener("click", function f(e) { 
@@ -172,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="team-array-icon"><div id="teammate3" class="overlay"></div></div>
                     </div>
                     <div class="team-array team-selects">
-                        <div id="selector0" class="team-array-selector"></div>
+                        <div id="selector0" class="team-array-selector teammate-selected"></div>
                         <div id="selector1" class="team-array-selector"></div>
                         <div id="selector2" class="team-array-selector"></div>
                         <div id="selector3" class="team-array-selector"></div>
@@ -183,8 +229,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-box card-ttask">
                     <div class="task-status in-progress"></div>
                     <div class="task-info">
+                        <div class="task-title"> Finish report </div>
+                        <div class="impending"> Due today </div>
+                    </div>
+                    <div class="task-due">
+                        <div class="due-day"> 9 </div>
+                        <div class="due-month"> MAR </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-box card-ttask">
+                    <div class="task-status in-progress"></div>
+                    <div class="task-info">
                         <div class="task-title"> Annotated outline </div>
-                        <div class="impending"> Due tomorrow </div>
+                        <div class="impending"> Due in 1 day </div>
                     </div>
                     <div class="task-due">
                         <div class="due-day"> 10 </div>
@@ -194,13 +253,25 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="card">
                 <div class="card-box card-ttask">
-                    <div class="task-status unstarted"></div>
+                    <div class="task-status in-progress"></div>
                     <div class="task-info">
-                        <div class="task-title"> Interview with Maya </div>
+                        <div class="task-title"> Lab writeup </div>
                         <div class="impending"> Due in 2 days </div>
                     </div>
                     <div class="task-due">
-                        <div class="due-day"> 10 </div>
+                        <div class="due-day"> 11 </div>
+                        <div class="due-month"> MAR </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-box card-ttask">
+                    <div class="task-status unstarted"></div>
+                    <div class="task-info">
+                        <div class="task-title"> Prosimm team meeting </div>
+                    </div>
+                    <div class="task-due">
+                        <div class="due-day"> 14 </div>
                         <div class="due-month"> MAR </div>
                     </div>
                 </div>
@@ -472,7 +543,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if(stealing){
                 card.addEventListener("click", function f(e) {
                     let stolenCard = e.currentTarget
-                    console.log("Stole" + e.currentTarget.innerHTML)
                     shift(stolenCard)
                 });
             }
@@ -481,7 +551,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function shift(card){
         let stealInfo = document.getElementById("steal-info")
-        stealInfo.before(card)
+        if(!befores.includes(card)){
+            stealInfo.before(card)
+            befores.push(card)
+            if(afters.includes(card)){
+                afters.pop(card)
+            }
+        } else {
+            stealInfo.after(card)
+            afters.push(card)
+            befores.pop(card)
+        }
+        
     }
 
     function journalCardCreator(teammate,act,message,date){
@@ -545,7 +626,108 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 let lightboxContent = document.createElement("div")
                 lightboxContent.id = "lightbox-content"
-                lightboxContent.innerText = "Adding new individual task"
+
+                    if(team){
+                        let taskAssignee = document.createElement("div")
+                        taskAssignee.classList.add("task-assignee")
+                            let tai1 = document.createElement("div")
+                            tai1.classList.add("team-array-icon")
+                            tai1.id = "assigned"
+                            tai1.innerHTML =`<div id="teammate0" class="overlay"></div>`
+                            let tai2 = document.createElement("div")
+                            tai2.classList.add("team-array-icon")
+                            tai2.innerHTML =`<div id="teammate1" class="overlay"></div>`
+                            let tai3 = document.createElement("div")
+                            tai3.classList.add("team-array-icon")
+                            tai3.innerHTML =`<div id="teammate2" class="overlay"></div>`
+                            let tai4 = document.createElement("div")
+                            tai4.classList.add("team-array-icon")
+                            tai4.innerHTML =`<div id="teammate3" class="overlay"></div>`
+
+                            let tais = [tai1,tai2,tai3,tai4]
+                            for (let tai of tais){
+                                tai.addEventListener("click", function f(e){
+                                    let p = e.currentTarget.parentElement
+                                    let icons = p.getElementsByClassName("team-array-icon")
+                                    for (let icon of icons){
+                                        icon.id = ""
+                                    }
+                                    e.currentTarget.id = "assigned"
+                                })
+                            }
+
+                            taskAssignee.appendChild(tai1)
+                            taskAssignee.appendChild(tai2)
+                            taskAssignee.appendChild(tai3)
+                            taskAssignee.appendChild(tai4)
+
+                        lightboxContent.appendChild(taskAssignee)
+                    }
+
+                    let taskName = document.createElement("div")
+                    taskName.classList.add("task-name")
+                        taskName.innerHTML = `<input placeholder="Enter task name">`
+
+                    let taskCalendar = document.createElement("div")
+                    taskCalendar.classList.add("task-calendar")
+                    taskCalendar.id="calendar"
+                        taskCalendar.innerHTML = `Due Date <input placeholder="DD"><input placeholder="MM">`
+
+                    let taskProgress = document.createElement("div")
+                    taskProgress.classList.add("task-progress")
+                        let pb1 = document.createElement("div")
+                        pb1.classList.add("progress-box")
+                        pb1.classList.add("unstarted")
+                        pb1.classList.add("box-select")
+                        let pb2 = document.createElement("div")
+                        pb2.classList.add("progress-box")
+                        pb2.classList.add("in-progress")
+                        let pb3 = document.createElement("div")
+                        pb3.classList.add("progress-box")
+                        pb3.classList.add("paused")
+                        let pb4 = document.createElement("div")
+                        pb4.classList.add("progress-box")
+                        pb4.classList.add("completed")
+
+                        taskProgress.addEventListener("click", function f(e){
+                            if(e.target.classList.contains("progress-box")){
+                                let pbs = e.currentTarget.getElementsByClassName("progress-box")
+                                for(pb of pbs){
+                                    pb.classList.remove("box-select")
+                                }
+                                e.target.classList.add("box-select")
+                            }
+                        })
+                        
+                        
+                        taskProgress.appendChild(pb1)
+                        taskProgress.innerHTML += "Not Started"
+                        taskProgress.appendChild(pb2)
+                        taskProgress.innerHTML += "In Progress"
+                        taskProgress.appendChild(pb3)
+                        taskProgress.innerHTML += "Paused"
+                        taskProgress.appendChild(pb4)
+                        taskProgress.innerHTML += "Completed"
+
+                    let taskJournal = document.createElement("div")
+                    taskJournal.classList.add("task-journal")
+                        let taskCheckbox = document.createElement("div")
+                        taskCheckbox.classList.add("task-modal-checkbox")
+                        taskJournal.addEventListener("click", function f(e){
+                            let tick = e.currentTarget.children[0]
+                            let haveSomething = (tick.innerHTML == "") ? false : true
+                            if(haveSomething) // untick
+                                tick.innerHTML = ""
+                            else // tick
+                                tick.innerHTML = `<div class="tick"></div>`
+                        })
+                        taskJournal.appendChild(taskCheckbox)
+                        taskJournal.innerHTML += `<div> Write a journal </div>`
+
+                    lightboxContent.appendChild(taskName)
+                    lightboxContent.appendChild(taskCalendar)
+                    lightboxContent.appendChild(taskProgress)
+                    lightboxContent.appendChild(taskJournal)
 
                 let options = document.createElement("div")
                 options.classList.add("options")
@@ -559,6 +741,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     confirm.id = "confirm"
                     confirm.innerText = "CONFIRM"
                     confirm.addEventListener("click", function f(e){
+                        let shouldJournal = document.getElementsByClassName("task-modal-checkbox")[0].innerHTML == "" ? false : true
                         if(!edit){
                             if(team)
                                 content.appendChild(ttaskCardCreator("NS", "New Task", "15 MAR"))
@@ -568,6 +751,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
                         }
                         closeModal()
+
+                        if(shouldJournal)
+                            body.appendChild(journalModal("NEW JOURNAL", true))
                     })
 
                 options.appendChild(cancel)
@@ -628,7 +814,7 @@ document.addEventListener("DOMContentLoaded", () => {
         body.appendChild(modal)
         return modal
     }
-
+    
     var inviteModal = (title) => {
         let modal = document.createElement("div")
         modal.id = "modal"
