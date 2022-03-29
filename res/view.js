@@ -666,12 +666,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     let taskName = document.createElement("div")
                     taskName.classList.add("task-name")
-                        taskName.innerHTML = `<input placeholder="Enter task name">`
+                        taskName.innerHTML = `<input id="new-task-name" placeholder="Enter task name">`
 
                     let taskCalendar = document.createElement("div")
                     taskCalendar.classList.add("task-calendar")
                     taskCalendar.id="calendar"
-                        taskCalendar.innerHTML = `Due Date <input placeholder="DD"><input placeholder="MM">`
+                        taskCalendar.innerHTML = `Due Date <input id="dd" placeholder="DD"><input id="mm" placeholder="MM">`
 
                     let taskProgress = document.createElement("div")
                     taskProgress.classList.add("task-progress")
@@ -743,10 +743,33 @@ document.addEventListener("DOMContentLoaded", () => {
                     confirm.addEventListener("click", function f(e){
                         let shouldJournal = document.getElementsByClassName("task-modal-checkbox")[0].innerHTML == "" ? false : true
                         if(!edit){
+                            let newTaskName = document.getElementById("new-task-name").value
+                            if(newTaskName.length < 1)
+                                newTaskName = "Untitled Task"
+                            let newDueDay = document.getElementById("dd").value
+                            if(newDueDay.length < 1)
+                                newDueDay = "9"
+                            let newDueMonth = document.getElementById("mm").value
+                            switch(newDueMonth){
+                                case "01": newDueMonth = "JAN"; break;
+                                case "02": newDueMonth = "FEB"; break;
+                                case "03": newDueMonth = "MAR"; break;
+                                case "04": newDueMonth = "APR"; break;
+                                case "05": newDueMonth = "MAY"; break;
+                                case "06": newDueMonth = "JUN"; break;
+                                case "07": newDueMonth = "JUL"; break;
+                                case "08": newDueMonth = "AUG"; break;
+                                case "09": newDueMonth = "SEP"; break;
+                                case "10": newDueMonth = "OCT"; break;
+                                case "11": newDueMonth = "NOV"; break;
+                                case "12": newDueMonth = "DEC"; break;
+                                case "" : newDueMonth = "MAR"; break;
+                            }
+                            let newDueDate = newDueDay + " " + newDueMonth
                             if(team)
-                                content.appendChild(ttaskCardCreator("NS", "New Task", "15 MAR"))
+                                content.appendChild(ttaskCardCreator("NS", newTaskName, newDueDate))
                             else{
-                                content.appendChild(taskCardCreator("New Task", "15 MAR"))
+                                content.appendChild(taskCardCreator(newTaskName, newDueDate))
                                 content.appendChild(document.getElementById("del-btn"))
                             }
                         }
@@ -781,7 +804,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 let lightboxContent = document.createElement("div")
                 lightboxContent.id = "lightbox-content"
-                lightboxContent.innerHTML = `<textarea name="textarea"rows="15" cols="40">Write something here</textarea>`
+                lightboxContent.innerHTML = `<textarea id="journal-area" name="textarea"rows="15" cols="40">Write something here</textarea>`
                 theMessage = "Sample message"
 
                 let options = document.createElement("div")
@@ -797,9 +820,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     confirm.innerText = "CONFIRM"
                     confirm.addEventListener("click", function f(e){
                         if(!edit){
-                            content.insertBefore(journalCardCreator("Andrea Abellera", "wrote a new message", theMessage, "March 9"), document.getElementsByClassName("heading")[0])
+                            let entry = document.getElementById("journal-area").value
+                            if(entry.length < 1 || entry == "Write something here")
+                                entry = theMessage
+                            content.insertBefore(journalCardCreator("Andrea Abellera", "wrote a new message", entry, "March 9"), document.getElementsByClassName("heading")[0])
                             content.insertBefore(document.getElementsByClassName("heading")[0], document.getElementsByClassName("card")[0])
-                        }
+                        } /*else { // edit
+                            let entry = document.getElementById("journal-area").value
+                            let lightbox = e.currentTarget.parentElement.parentElement
+                            let newMessage = lightbox.getElementById("journal-area").value
+                            console.log(e.currentTarget.parentElement.parentElement)
+                        }*/
                             closeModal()
                     })
 
