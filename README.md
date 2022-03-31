@@ -1,5 +1,5 @@
 # Prosimm - Projects Simply Made
-![Persimmon](/res/persimmon.jpg)
+![Persimmon](/res/persimmon.jpg)  
 Pictured above: The fruit Persimmon  
 
 ## Overview
