@@ -567,6 +567,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let confirmSteal = document.createElement("button")
         confirmSteal.classList.add("steal-btn")
         confirmSteal.innerHTML = "Confirm task steal"
+        if(isMobile)
+            confirmSteal.style.fontSize = "30px"
         confirmSteal.addEventListener("click", function f(e) {
             let stealCard = document.getElementById("steal-card")
             let stealInfo = document.getElementById("steal-info")
