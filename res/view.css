@@ -192,7 +192,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #nav-profile .nav-icon{
-    background-image: url(nav_myteam.png);
+    background-image: url(nav_profile.png);
 }
 
   /*============
@@ -388,7 +388,7 @@ body::-webkit-scrollbar-thumb {
     border-width: 0.1em;
     border-radius: 2em;
     position: relative;
-    background-image: url(nav_myteam.png);
+    background-image: url(nav_profile.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -440,7 +440,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #setting-name{
-    background-image: url("nav_myteam.png");
+    background-image: url("nav_profile.png");
 }
 
 #setting-email{
@@ -558,7 +558,7 @@ body::-webkit-scrollbar-thumb {
     border-width: 0.1em;
     border-radius: 3em;
     position: relative;
-    background-image: url(nav_myteam.png);
+    background-image: url(nav_profile.png);
     background-size: contain;
     background-position: center;
     display: grid;
