@@ -9,6 +9,6 @@ Pictured above: The fruit Persimmon
 - [Andrea](https://github.com/andreaabellera): The Developer
 - Jane: The Designer
 - Lyka: The Demo Star
-- Yu Han: The Artist
+- Yu Han: The Drawist
 
 
