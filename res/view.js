@@ -871,7 +871,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 let lightboxContent = document.createElement("div")
                 lightboxContent.id = "lightbox-content"
-                lightboxContent.innerHTML = `<textarea id="journal-area" name="textarea"rows="15" cols="40">Write something here</textarea>`
+                lightboxContent.innerHTML = `<textarea id="journal-area" name="textarea">Write something here</textarea>`
                 theMessage = "Sample message"
 
                 let options = document.createElement("div")
