@@ -2,6 +2,9 @@ let currView = "nav-my-tasks"
 let currProject = "project0"
 let today = 9 // Assume today is March 9 for due warnings
 let user = "Andrea Abellera"
+let city = "Winnipeg"
+let email = "email_address@domain.com"
+let phone = "+1(204)444-4444"
 
 let andrea = [ // Progress, Task Names, Task Dues
     ["IP","IP","IP","NS"],
@@ -153,11 +156,16 @@ document.addEventListener("DOMContentLoaded", () => {
             loadProfile()
             add.style.display="none"
             let fields = document.getElementsByTagName("input")
-            let fillers = ["Andrea Abellera", "email_address@domain.com", "Winnipeg", "2045582887"]
+            let fillers = [user, email, city, phone]
             for(let i in fields){
                 fields[i].value = fillers[i]
             }
-            document.getElementsByClassName("heading")[0].addEventListener("click", function f(e) {
+            document.getElementById("save-changes").addEventListener("click", function f(e) {
+                user = document.getElementById("set-name").value
+                console.log(user)
+                city = document.getElementById("set-city").value
+                email = document.getElementById("set-email").value
+                phone = document.getElementById("set-phone").value
                 alert("Profile saved")
             });
         }
@@ -209,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="team-array-bar"><div id="sbar0" class="subbar"></div><div id="bar0" class="bar"></div></div>
                         <div class="team-array-bar"><div id="sbar1" class="subbar"></div><div id="bar1" class="bar"></div></div>
                         <div class="team-array-bar"><div id="sbar2" class="subbar"></div><div id="bar2" class="bar"></div></div>
-                        <div class="team-array-bar"><div id="bar3" class="bar"></div></div>
+                        <div class="team-array-bar"></div>
                     </div>
                     <div class="team-array team-icons">
                         <div class="team-array-icon"><div id="teammate0" class="overlay"></div></div>
@@ -287,8 +295,14 @@ document.addEventListener("DOMContentLoaded", () => {
             currCards = document.getElementsByClassName("card")
         }
         if(team[num][0].length == 0){ // IT IS A JANE!!!
+            befores = []
+            afters = []
+            let bars = document.getElementsByClassName("team-array-bar")
+            let lastBar = bars[bars.length - 1]
+            lastBar.innerHTML = ""
             let stealC = document.createElement("div")
             stealC.classList.add("card")
+            stealC.id="steal-card"
             let stealInfo = document.createElement("div")
             stealInfo.classList.add("card-box")
             stealInfo.id="steal-info"
@@ -320,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
         content.innerHTML = `<div class="heading"> JOURNAL ENTRIES </div>`
 
         // Create placeholder journals
-        let teammates = ["Jane Tang", "Andrea Abellera"]
+        let teammates = ["Jane Tang", user]
         let acts = ["finished a task", "editted a task"]
         let messages = ["Woohoo yay", "Give me one more day to fix the bugs"]
         let dates = ["March 5", "March 6"]
@@ -336,10 +350,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-box card-task">
                     <div class="teammate-pfp"><div id="teammate0" class="overlay"></div></div>
                     <div class="teammate-info">
-                        <div class="teammate-name"> Andrea Abellera </div>
-                        <div class="teammate-city greyed"> Winnipeg | 8:03pm</div>
-                        <div class="teammate-email"> email_address@domain.com </div>
-                        <div class="teammate-phone"> +1(204)444-4444 </div>
+                        <div class="teammate-name"> ${user} </div>
+                        <div class="teammate-city greyed"> ${city} | 8:03pm</div>
+                        <div class="teammate-email"> ${email} </div>
+                        <div class="teammate-phone"> ${phone} </div>
                     </div>
                 </div>
             </div>
@@ -387,22 +401,22 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="card">
                 <div class="card-box card-profile">
                     <div id="setting-name" class="setting-icon"></div>
-                    <input placeholder="Full Name">
+                    <input id="set-name" placeholder="Full Name">
                 </div>
                 <div class="card-box card-profile">
                     <div id="setting-email" class="setting-icon"></div>
-                    <input placeholder="Email Address">
+                    <input id="set-email" placeholder="Email Address">
                 </div>
                 <div class="card-box card-profile">
                     <div id="setting-time" class="setting-icon"></div>
-                    <input placeholder="City">
+                    <input id="set-city" placeholder="City">
                 </div>
                 <div class="card-box card-profile">
                     <div id="setting-avail" class="setting-icon"></div>
-                    <input placeholder="Phone number">
+                    <input id="set-phone" placeholder="Phone number">
                 </div>
             </div>
-            <div class="heading"> SAVE CHANGES </div>
+            <div id="save-changes" class="heading"> SAVE CHANGES </div>
         `
     }
     
@@ -495,7 +509,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     info.innerHTML = `<div class="task-title"> ${name} </div>
                                     <div class="impending"> ${getDueMessage(toks[0])} </div>`
                     info.addEventListener("click", function f(e) {
-                        body.appendChild(taskModal("EDIT TASK", true))
+                        body.appendChild(taskModal("EDIT TASK", true,false,e.currentTarget.parentElement.parentElement))
                     });
 
                 cardInner.appendChild(checkbox)
@@ -550,17 +564,58 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function shift(card){
+        let confirmSteal = document.createElement("button")
+        confirmSteal.classList.add("steal-btn")
+        confirmSteal.innerHTML = "Confirm task steal"
+        confirmSteal.addEventListener("click", function f(e) {
+            let stealCard = document.getElementById("steal-card")
+            let stealInfo = document.getElementById("steal-info")
+            stealCard.removeChild(stealInfo)
+            let currCards = content.getElementsByClassName("card")
+            while(currCards.length > 0){
+                for(theCard of currCards)
+                    theCard.parentElement.removeChild(theCard)
+                currCards = content.getElementsByClassName("card")
+            }
+            let stealBtns = content.getElementsByClassName("steal-btn")
+            while(stealBtns.length > 0){
+                for(btn of stealBtns)
+                    btn.parentElement.removeChild(btn)
+                stealBtns = content.getElementsByClassName("steal-btn")
+            }
+            
+            let bars = document.getElementsByClassName("team-array-bar")
+            let lastBar = bars[bars.length-1]
+            let h = 0
+            for(bCard of befores){
+                h += 20
+                content.appendChild(bCard)
+            }
+            let newBar = document.createElement("div")
+            newBar.id="bar3"
+            newBar.classList.add("bar")
+            newBar.style.height = h + "%"
+            lastBar.appendChild(newBar)
+        });
+        
         let stealInfo = document.getElementById("steal-info")
-        if(!befores.includes(card)){
+        if(!befores.includes(card)){ // move card to top of stealInfo
             stealInfo.before(card)
             befores.push(card)
             if(afters.includes(card)){
                 afters.pop(card)
             }
-        } else {
+        } else { // move card to bottom of stealInfo
             stealInfo.after(card)
             afters.push(card)
             befores.pop(card)
+        }
+
+        if(befores.length > 0){
+            content.appendChild(confirmSteal)
+        } else {
+            let stealBtn = document.getElementById("steal-btn")
+            content.removeChild(stealBtn)
         }
         
     }
@@ -583,7 +638,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     journalHead.innerHTML = `
                         <div>
-                            <span class="journaller"> ${teammate} </span>
+                            <span class="journaller">${teammate}</span>
                             <span class="journal-act"> ${act} </span>
                         </div>
                         <span class="journal-date"> ${date} </span>
@@ -599,7 +654,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         card.appendChild(cardInner)
         card.addEventListener("click", function f(e){
-            body.appendChild(journalModal("EDIT JOURNAL", true))
+            let journaller = card.getElementsByClassName("journaller")[0].innerText.replace(" ","")
+            let theUser = user.replace(" ","")
+            if (journaller == theUser)
+                body.appendChild(journalModal("EDIT JOURNAL", true,e.currentTarget))
         })
         return card
     }
@@ -613,7 +671,7 @@ document.addEventListener("DOMContentLoaded", () => {
         body.removeChild(document.getElementById("modal"))
     }
 
-    var taskModal = (title, edit=false, team=false) => {
+    var taskModal = (title, edit=false, team=false, card=null) => {
         let modal = document.createElement("div")
         modal.id = "modal"
 
@@ -627,8 +685,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 let lightboxContent = document.createElement("div")
                 lightboxContent.id = "lightbox-content"
 
-                    if(team){
-                        let taskAssignee = document.createElement("div")
+                    if(team){ 
+                        /*let taskAssignee = document.createElement("div")
                         taskAssignee.classList.add("task-assignee")
                             let tai1 = document.createElement("div")
                             tai1.classList.add("team-array-icon")
@@ -661,7 +719,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             taskAssignee.appendChild(tai3)
                             taskAssignee.appendChild(tai4)
 
-                        lightboxContent.appendChild(taskAssignee)
+                        lightboxContent.appendChild(taskAssignee)*/
                     }
 
                     let taskName = document.createElement("div")
@@ -742,8 +800,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     confirm.innerText = "CONFIRM"
                     confirm.addEventListener("click", function f(e){
                         let shouldJournal = document.getElementsByClassName("task-modal-checkbox")[0].innerHTML == "" ? false : true
-                        if(!edit){
-                            let newTaskName = document.getElementById("new-task-name").value
+                        let newTaskName = document.getElementById("new-task-name").value
                             if(newTaskName.length < 1)
                                 newTaskName = "Untitled Task"
                             let newDueDay = document.getElementById("dd").value
@@ -766,12 +823,22 @@ document.addEventListener("DOMContentLoaded", () => {
                                 case "" : newDueMonth = "MAR"; break;
                             }
                             let newDueDate = newDueDay + " " + newDueMonth
+                        
+                        if(!edit){
                             if(team)
                                 content.appendChild(ttaskCardCreator("NS", newTaskName, newDueDate))
                             else{
                                 content.appendChild(taskCardCreator(newTaskName, newDueDate))
                                 content.appendChild(document.getElementById("del-btn"))
                             }
+                        } else { // is edit
+                            console.log(card.innerHTML)
+                            let info = card.getElementsByClassName("task-info")[0]
+                            info.innerHTML = `<div class="task-title"> ${newTaskName} </div>
+                                    <div class="impending"> ${getDueMessage(newDueDay)} </div>`
+                            let due = card.getElementsByClassName("task-due")[0]
+                            due.innerHTML = `<div class="due-day"> ${newDueDay} </div>
+                            <div class="due-month"> ${newDueMonth} </div>`
                         }
                         closeModal()
 
@@ -791,7 +858,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return modal
     }
 
-    var journalModal = (title, edit=false) => {
+    var journalModal = (title, edit=false, card=null) => {
         let modal = document.createElement("div")
         modal.id = "modal"
 
@@ -819,18 +886,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     confirm.id = "confirm"
                     confirm.innerText = "CONFIRM"
                     confirm.addEventListener("click", function f(e){
+                        let entry = document.getElementById("journal-area").value
+                        if(entry.length < 1 || entry == "Write something here")
+                            entry = theMessage
                         if(!edit){
-                            let entry = document.getElementById("journal-area").value
-                            if(entry.length < 1 || entry == "Write something here")
-                                entry = theMessage
-                            content.insertBefore(journalCardCreator("Andrea Abellera", "wrote a new message", entry, "March 9"), document.getElementsByClassName("heading")[0])
+                            content.insertBefore(journalCardCreator(user, "wrote a new message", entry, "March 9"), document.getElementsByClassName("heading")[0])
                             content.insertBefore(document.getElementsByClassName("heading")[0], document.getElementsByClassName("card")[0])
-                        } /*else { // edit
-                            let entry = document.getElementById("journal-area").value
-                            let lightbox = e.currentTarget.parentElement.parentElement
-                            let newMessage = lightbox.getElementById("journal-area").value
-                            console.log(e.currentTarget.parentElement.parentElement)
-                        }*/
+                        } else if(edit && card!=null) { // edit
+                            card.getElementsByClassName("journal-desc")[0].innerText = entry
+                        }
                             closeModal()
                     })
 

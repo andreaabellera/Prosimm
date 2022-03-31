@@ -228,6 +228,21 @@ body::-webkit-scrollbar-thumb {
     border-radius: 1em;
 }
 
+.steal-btn{
+    border-color: var(--grey);
+    border-style: solid;
+    color: white;
+    background-color: var(--leaf);
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    padding: 1em;
+    margin-top: 3vh;
+    position: absolute;
+    right: 5%;
+    border-radius: 1em;
+}
+
 .options{
     display: grid;
     grid-template-columns: 50% 50%;
