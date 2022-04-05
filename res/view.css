@@ -571,6 +571,8 @@ body::-webkit-scrollbar-thumb {
     height: 0.5em;
     width: 3em;
     background-color: white;
+    text-align: center;
+    font-size: smaller;
 }
 
 .team-array-bar{

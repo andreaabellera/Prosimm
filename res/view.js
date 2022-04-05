@@ -226,10 +226,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="team-array-icon"><div id="teammate3" class="overlay"></div></div>
                     </div>
                     <div class="team-array team-selects">
-                        <div id="selector0" class="team-array-selector teammate-selected"></div>
-                        <div id="selector1" class="team-array-selector"></div>
-                        <div id="selector2" class="team-array-selector"></div>
-                        <div id="selector3" class="team-array-selector"></div>
+                        <div id="selector0" class="team-array-selector teammate-selected">Andrea</div>
+                        <div id="selector1" class="team-array-selector">YuHan</div>
+                        <div id="selector2" class="team-array-selector">Lyka</div>
+                        <div id="selector3" class="team-array-selector">Jane</div>
                     </div>
                 </div>
             </div>
