@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
-
-html, body{
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -18,21 +18,22 @@ html, body{
 body::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0);
 }
-  
+
 body::-webkit-scrollbar {
     width: 0px;
     background-color: rgba(0, 0, 0, 0);
 }
-  
+
 body::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0);
 }
-  
-  /*=======================
+
+
+/*=======================
   //  PROSIMM DESIGN KIT
   ========================*/
-  
-:root{
+
+:root {
     --darkOrange: #C67428;
     --orange: #FF9534;
     --yellow: #F6E2B0;
@@ -44,31 +45,34 @@ body::-webkit-scrollbar-thumb {
     --whitesmoke: #F3F3F3;
 }
 
-  /*================
+
+/*================
   //  ANIMATIONS
   =================*/
 
-@keyframes desc{
-    0%{
-      transform: translateX(0em) skew(0deg,0turn);
+@keyframes desc {
+    0% {
+        transform: translateX(0em) skew(0deg, 0turn);
     }
-    100%{
-      transform: translateX(0em) skew(0deg,0turn);
+    100% {
+        transform: translateX(0em) skew(0deg, 0turn);
     }
 }
 
-  /*============
+
+/*============
   //  VIEW
   =============*/
-#modal{
+
+#modal {
     position: absolute;
     height: inherit;
     width: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 3;
 }
 
-.lightbox{
+.lightbox {
     position: absolute;
     height: max-content;
     width: 80%;
@@ -81,14 +85,14 @@ body::-webkit-scrollbar-thumb {
     justify-items: center;
 }
 
-#lightbox-content{
+#lightbox-content {
     height: max-content;
     max-height: 40vh;
     margin: 2vh 0 2vh 0;
     width: 90%;
 }
 
-.header{
+.header {
     position: fixed;
     left: 0;
     height: 11vh;
@@ -101,7 +105,7 @@ body::-webkit-scrollbar-thumb {
     z-index: 3;
 }
 
-#logo{
+#logo {
     background-image: url(logo.png);
     height: 1.25em;
     width: 1.25em;
@@ -111,29 +115,31 @@ body::-webkit-scrollbar-thumb {
     background-repeat: no-repeat;
 }
 
-#h-left{
+#h-left {
     margin-left: 4vw;
     color: var(--orange);
     display: flex;
     align-items: center;
 }
 
-#h-right{
+#h-right {
     margin-right: 6vw;
     color: var(--grey);
     font-size: 150%;
     display: block;
 }
 
-#h-left:hover, #h-right:hover, .nav-box:hover{
+#h-left:hover,
+#h-right:hover,
+.nav-box:hover {
     cursor: pointer;
 }
 
-.view{
+.view {
     width: 100%;
 }
 
-#content{
+#content {
     width: 100%;
     height: 100vh;
     /* background-color: #8AD87E; */
@@ -141,7 +147,7 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 15vh;
 }
 
-#navigation{
+#navigation {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -156,18 +162,18 @@ body::-webkit-scrollbar-thumb {
     /* box-shadow: 0.1em 0.1em 2em 0.02em rgba(0, 0, 0, 0.18); */
 }
 
-.nav-box{
+.nav-box {
     display: grid;
     justify-items: center;
     height: 100%;
     width: 100%;
 }
 
-.nav-active{
+.nav-active {
     background-color: var(--liteGrey);
 }
 
-.nav-icon{
+.nav-icon {
     height: 3em;
     width: 3em;
     background-size: contain;
@@ -175,31 +181,32 @@ body::-webkit-scrollbar-thumb {
     background-repeat: no-repeat;
 }
 
-#nav-my-tasks .nav-icon{
+#nav-my-tasks .nav-icon {
     background-image: url(nav_mytasks.png);
 }
 
-#nav-team-tasks .nav-icon{
+#nav-team-tasks .nav-icon {
     background-image: url(nav_teamtasks.png);
 }
 
-#nav-journals .nav-icon{
+#nav-journals .nav-icon {
     background-image: url(nav_journals.png);
 }
 
-#nav-my-team .nav-icon{
+#nav-my-team .nav-icon {
     background-image: url(nav_myteam.png);
 }
 
-#nav-profile .nav-icon{
+#nav-profile .nav-icon {
     background-image: url(nav_profile.png);
 }
 
-  /*============
+
+/*============
   //  CARDS
   =============*/
 
-.heading{
+.heading {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -210,7 +217,7 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
 }
 
-#del-btn{
+#del-btn {
     /* background-color: var(--crimson);
     border-color: white; 
     color: white; */
@@ -228,7 +235,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 1em;
 }
 
-.steal-btn{
+.steal-btn {
     border-color: var(--grey);
     border-style: solid;
     color: white;
@@ -243,7 +250,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 1em;
 }
 
-.options{
+.options {
     display: grid;
     grid-template-columns: 50% 50%;
     text-align: center;
@@ -254,26 +261,27 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
 }
 
-#cancel{
-    width: 100%; 
+#cancel {
+    width: 100%;
     background-color: var(--liteGrey);
     color: var(--grey);
     padding: 2vh 0 2vh 0;
 }
 
-.card, .notcard{
-    height: max-content;
+.card,
+.notcard {
+    height: auto;
     display: flex;
     flex-direction: column;
     cursor: pointer;
 }
-  
-.card-box{
+
+.card-box {
     width: 90%;
     align-self: center;
 }
 
-.card-task{
+.card-task {
     display: grid;
     padding: 3vh 0 3vh 0;
     grid-template-columns: auto 1fr 3em;
@@ -282,7 +290,7 @@ body::-webkit-scrollbar-thumb {
     color: var(--darkOrange);
 }
 
-.card-ttask{
+.card-ttask {
     display: grid;
     padding: 1vh 0 1vh 0;
     grid-template-columns: auto 1fr 3em;
@@ -291,7 +299,7 @@ body::-webkit-scrollbar-thumb {
     color: var(--darkOrange);
 }
 
-.card-project{
+.card-project {
     display: grid;
     padding: 3vh 0 3vh 0;
     grid-template-columns: auto 1fr;
@@ -300,11 +308,11 @@ body::-webkit-scrollbar-thumb {
     color: var(--darkOrange);
 }
 
-.card-journal{
+.card-journal {
     padding: 5vh 0 5vh 0;
 }
 
-.card-profile{
+.card-profile {
     display: grid;
     padding: 4vh 0 4vh 0;
     grid-template-columns: auto 1fr;
@@ -313,35 +321,43 @@ body::-webkit-scrollbar-thumb {
     color: var(--darkOrange);
 }
 
-#steal-info{
+#steal-info {
     color: var(--darkOrange);
     text-align: center;
     margin: 1vh 0 2vh 0;
 }
 
-.odd{
+.odd {
     background-color: var(--liteYellow);
 }
 
-.even{
+.even {
     background-color: var(--yellow);
 }
 
-.journal-head{
+.journal-head {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2vh;
 }
 
-.journaller, .task-title, .project-name, .teammate-name{
+.journaller,
+.task-title,
+.project-name,
+.teammate-name {
     font-weight: bold;
 }
 
-.journal-act, .project-desc, .impending, .teammate-email, .teammate-phone{
+.journal-act,
+.project-desc,
+.impending,
+.teammate-email,
+.teammate-phone {
     font-size: smaller;
 }
 
-.task-checkbox, .task-modal-checkbox{
+.task-checkbox,
+.task-modal-checkbox {
     border-style: solid;
     border-color: var(--grey);
     border-width: 0.1em;
@@ -354,7 +370,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
 }
 
-.pie{
+.pie {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -363,26 +379,26 @@ body::-webkit-scrollbar-thumb {
     margin: 0 1.5em 0 0.5em;
 }
 
-#pie0{
+#pie0 {
     background-image: url(pie1.png);
 }
 
-#pie1{
+#pie1 {
     background-image: url(pie2.png);
 }
 
-#pie2{
+#pie2 {
     background-image: url(pie3.png);
 }
 
-.project-select{
+.project-select {
     border-style: dotted;
     border-color: var(--leaf);
     border-width: 0.2em;
     border-radius: 1em;
 }
 
-.teammate-pfp{
+.teammate-pfp {
     border-style: solid;
     border-color: var(--grey);
     border-width: 0.1em;
@@ -398,30 +414,30 @@ body::-webkit-scrollbar-thumb {
     overflow: hidden;
 }
 
-.overlay{
+.overlay {
     position: absolute;
     z-index: 2;
     height: 100%;
     width: 100%;
 }
 
-#teammate0{
+#teammate0 {
     background-color: rgba(40, 225, 10, 0.2);
 }
 
-#teammate1{
+#teammate1 {
     background-color: rgba(40, 10, 225, 0.2);
 }
 
-#teammate2{
+#teammate2 {
     background-color: rgba(40, 225, 225, 0.2);
 }
 
-#teammate3{
+#teammate3 {
     background-color: rgba(225, 10, 40, 0.2);
 }
 
-.help-btn{
+.help-btn {
     background-image: url(help.png);
     background-size: contain;
     background-position: center;
@@ -430,7 +446,7 @@ body::-webkit-scrollbar-thumb {
     width: 3em;
 }
 
-.setting-icon{
+.setting-icon {
     margin: 0 1.5em 0 0.5em;
     background-size: contain;
     background-position: center;
@@ -439,80 +455,80 @@ body::-webkit-scrollbar-thumb {
     width: 4em;
 }
 
-#setting-name{
+#setting-name {
     background-image: url("nav_profile.png");
 }
 
-#setting-email{
+#setting-email {
     background-image: url("profile_email.png");
 }
 
-#setting-time{
+#setting-time {
     background-image: url("profile_time.png");
 }
 
-#setting-avail{
+#setting-avail {
     background-image: url("profile_avail.png");
 }
 
-.impending{
+.impending {
     color: var(--crimson);
 }
 
-.task-due{
+.task-due {
     text-align: center;
 }
 
-.task-status{
-    height: 90%;
+.task-status {
+    height: 7vh;
     width: 1.5em;
     margin-right: 1.5em;
 }
 
-.in-progress{
+.in-progress {
     background-color: var(--yellow);
 }
 
-.unstarted{
+.unstarted {
     background-color: var(--liteYellow);
 }
 
-.paused{
+.paused {
     background-color: var(--crimson);
 }
 
-.completed{
+.completed {
     background-color: var(--leaf);
 }
 
-.tick{
+.tick {
     background-color: var(--leaf);
     height: 80%;
     width: 80%;
     clip-path: polygon(70% 0%, 100% 30%, 50% 100%, 0% 60%, 40% 50%, 50% 70%);
 }
 
-.strike{
+.strike {
     text-decoration: line-through;
     color: var(--grey);
 }
 
-.greyed{
+.greyed {
     color: var(--grey);
 }
 
-.card-profile input{
-    height: 80%;
+.card-profile input {
+    height: 10vh;
     width: 55vw;
     border-style: none;
     border-bottom-style: solid;
     outline: none;
     color: var(--darkOrange);
     font-size: larger;
-    font-family:'Nunito', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
-#lightbox-content input{
+#lightbox-content input {
     height: 30%;
     width: 100%;
     border-style: none;
@@ -520,37 +536,37 @@ body::-webkit-scrollbar-thumb {
     outline: none;
     color: var(--darkOrange);
     font-size: larger;
-    font-family:'Nunito', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
-.team-progress{
+.team-progress {
     position: relative;
     height: 35vh;
     margin-bottom: 5vh;
 }
 
-.team-array{
+.team-array {
     position: absolute;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
 }
 
-.team-icons{
+.team-icons {
     bottom: 1.5em;
     z-index: 3;
 }
 
-.team-selects{
+.team-selects {
     bottom: 0;
 }
 
-.team-bars{
+.team-bars {
     bottom: 2em;
     z-index: 2;
 }
 
-.team-array-icon{
+.team-array-icon {
     height: 3em;
     width: 3em;
     border-style: solid;
@@ -567,7 +583,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
 }
 
-.team-array-selector{
+.team-array-selector {
     height: 0.5em;
     width: 3em;
     background-color: white;
@@ -575,7 +591,7 @@ body::-webkit-scrollbar-thumb {
     font-size: smaller;
 }
 
-.team-array-bar{
+.team-array-bar {
     height: 13em;
     width: 3em;
     background-color: white;
@@ -585,71 +601,73 @@ body::-webkit-scrollbar-thumb {
     position: relative;
 }
 
-.bar{
+.bar {
     width: 75%;
     background-color: var(--liteYellow);
 }
 
-.subbar{
+.subbar {
     position: absolute;
     width: 75%;
     background-color: var(--yellow);
 }
 
-#bar0{
+#bar0 {
     height: 60%;
 }
 
-#bar1{
+#bar1 {
     height: 80%;
 }
 
-#bar2{
+#bar2 {
     height: 40%;
 }
 
-#bar3{
+#bar3 {
     height: 0%;
 }
 
-#sbar0{
+#sbar0 {
     height: 40%;
 }
 
-#sbar1{
+#sbar1 {
     height: 30%;
 }
 
-#sbar2{
+#sbar2 {
     height: 30%;
 }
 
-#sbar3{
+#sbar3 {
     height: 0%;
 }
 
-.teammate-selected{
+.teammate-selected {
     background-color: var(--orange);
 }
 
-.task-assignee{
+.task-assignee {
     display: flex;
     justify-content: space-evenly;
     cursor: pointer;
     margin-bottom: 5vh;
 }
 
-.task-assignee .team-array-icon{
+.task-assignee .team-array-icon {
     filter: brightness(0.5);
 }
 
-#assigned{
+#assigned {
     filter: brightness(1);
 }
-.task-name{
+
+.task-name {
     margin-bottom: 2vh;
 }
-.task-calendar{ 
+
+.task-calendar {
     color: var(--darkOrange);
     margin-bottom: 2vh;
     display: grid;
@@ -657,10 +675,12 @@ body::-webkit-scrollbar-thumb {
     grid-column-gap: 3vw;
     align-items: flex-end;
 }
-#calendar input{
+
+#calendar input {
     height: 60%;
 }
-.task-progress{
+
+.task-progress {
     display: grid;
     grid-template-columns: 10% 40% 10% 40%;
     align-items: center;
@@ -668,27 +688,31 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 2vh;
     color: var(--grey);
 }
-.progress-box{
+
+.progress-box {
     height: 80%;
     cursor: pointer;
     margin-right: 2vw;
 }
-.box-select{
+
+.box-select {
     border-style: solid;
     border-width: 0.2em;
     border-color: var(--grey);
 }
-.task-journal{
+
+.task-journal {
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
     color: var(--darkOrange);
 }
-.task-modal-checkbox{
+
+.task-modal-checkbox {
     cursor: pointer;
 }
 
-textarea{
+textarea {
     width: 100%;
     height: 30vh;
     font-size: 26px;
